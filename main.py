@@ -62,6 +62,7 @@ for raw  in level:
     x = 0    
 # stop QUAdsAsAAT
 # start smailik
+x1, y1 = W // 2, H // 2
 point_list = []
 for angle in (0, 360, 10):
     rads = math.radians(angle)
@@ -69,7 +70,7 @@ for angle in (0, 360, 10):
     c = RADIUS * math.cos(rads)
     point_list.append(x1 + c)
     point_list.append(y1 + s)
-NP = len(point_list // 2)
+NP = len(point_list) // 2
 circle_list = batch.add(
     NP, pyglet.gl.GL_TRIANGLE_FAN, foreground,
     ('v2f', point_list),
