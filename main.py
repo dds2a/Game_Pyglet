@@ -3,6 +3,7 @@ from pyglet import gl
 from pyglet.window import key
 from pyglet.gl import *
 import math
+import pyglet.window import
 
 level = [
     '--------------------------',
@@ -47,6 +48,9 @@ batch = pyglet.graphics.Batch()
 background = pyglet.graphics.OrderedGroup(0)
 foreground = pyglet.graphics.OrderedGroup(1)
 
+keys = key.KeyStateHandler()
+window.push_handlers(keys)
+
 # start QUADS
 x = y = 0
 for raw  in level:
@@ -63,23 +67,34 @@ for raw  in level:
 # stop QUAdsAsAAT
 # start smailik
 x1, y1 = W // 2, H // 2
-point_list = []
-for angle in (0, 360, 10):
-    rads = math.radians(angle)
-    s = RADIUS * math.sin(rads)
-    c = RADIUS * math.cos(rads)
-    point_list.append(x1 + c)
-    point_list.append(y1 + s)
-NP = len(point_list) // 2
-circle_list = batch.add(
-    NP, pyglet.gl.GL_TRIANGLE_FAN, foreground,
-    ('v2f', point_list),
-    ('c4f', (0, 1, 0, .5) * NP)
-)
+def face(a, b, c, x1, y1, radius):
+    point_list = []
+    for angle in (0, 360, 10):
+        rads = math.radians(angle)
+        s = RADIUS * math.sin(rads)
+        c = RADIUS * math.cos(rads)
+        point_list.append(x1 + c)
+        point_list.append(y1 + s)
+    NP = len(point_list) // 2
+    circle_list = batch.add(
+        NP, pyglet.gl.GL_TRIANGLE_FAN, foreground,
+        ('v2f', point_list),
+        ('c4f', [1, 0, 0, .5] * NP)
+    )
+    print(circle_list.vertices[:])
+    print(circle_list.colors[:])
 # stop SMAiLIkKK
 
 def update(dt):
-    pass
+    if keys[key.LEFT]:
+        for ver in face_list:
+            ver.vertices][:]
+    if keys[key.RIGHT]:
+        print("rigt")
+    if keys[key.UP]:
+        print("ap")
+    if keys[key.DOWN]:
+        print("daun")
 
 
 @window.event
