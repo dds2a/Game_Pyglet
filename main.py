@@ -88,7 +88,7 @@ def face(a, b, c, x1, y1, radius):
 def update(dt):
     if keys[key.LEFT]:
         for ver in face_list:
-            ver.vertices][:]
+            ver.vertices[:]
     if keys[key.RIGHT]:
         print("rigt")
     if keys[key.UP]:
